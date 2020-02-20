@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { Carousel } from 'react-bootstrap';
 import SocketIOClient from 'socket.io-client';
 
-const endpoint = 'http://localhost:3000';
-const api = axios.create({ baseURL: 'http://localhost:3000/api' });
+const endpoint = 'https://sunday-slides.herokuapp.com';
+const api = axios.create({
+  baseURL: 'https://sunday-slides.herokuapp.com/api'
+});
 const socket = SocketIOClient(endpoint);
 
 
