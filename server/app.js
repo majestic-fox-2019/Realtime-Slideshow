@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 const server = require('http').createServer(app);
-const io = require('socket.io');
+const io = require('socket.io').listen(server);
 
 const indexRouter = require('./routes');
 
@@ -18,9 +18,14 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // socket.io
-app.use((req, res, next) => {
-  req.io = io;
-  next();
+io.on('connection', (socket) => {
+  console.log('Socket connected!');
+  socket.on('setSlideIndex', (indexValue) => {
+    io.emit('setSlideIndex', indexValue);
+  });
+  socket.on('disconnect', () => {
+    console.log('Socket has disconnected!');
+  });
 });
 
 app.use('/api', indexRouter);
