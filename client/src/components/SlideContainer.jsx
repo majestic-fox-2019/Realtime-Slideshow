@@ -16,12 +16,9 @@ export default class SlideContainer extends Component {
     this.state = {
       slides: [],
       slideIndex: 0,
-      // slideDirection: null,
       response: false
     };
 
-    // this.setIndex = this.setIndex.bind(this);
-    // this.setDirection = this.setDirection.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
 
@@ -42,10 +39,6 @@ export default class SlideContainer extends Component {
     return this.setState({ slideIndex: selectedIndex });
   }
 
-  // setDirection(direction) {
-  //   return this.setState({ slideDirection: direction });
-  // }
-
   getSlides() {
     const slides = [];
     this.state.slides.map((slide, idx) => {
@@ -58,7 +51,6 @@ export default class SlideContainer extends Component {
           />
           <Carousel.Caption>
             <h3>{slide.name}</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </Carousel.Caption>
         </Carousel.Item>
       );
@@ -69,14 +61,12 @@ export default class SlideContainer extends Component {
   handleSelect(selectedIndex, e) {
     socket.emit('setSlideIndex', selectedIndex);
     this.setIndex(selectedIndex);
-    // this.setDirection(e.direction);
   }
 
   render() {
     return (
       <Carousel
         activeIndex={this.state.slideIndex}
-        // direction={this.state.slideDirection}
         onSelect={this.handleSelect}
       >
         {this.getSlides()}
