@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Websocket Slide</title>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<!-- <div id="app"> -->
+
+	<div class="reveal">
+		<div class="slides">
+			<section
+				data-background-image="https://c4.wallpaperflare.com/wallpaper/428/434/322/art-computer-digital-art-concept-art-wallpaper-preview.jpg">
+				Slide 1</section>
+			<section
+				data-background-image="https://c4.wallpaperflare.com/wallpaper/760/955/638/artwork-landscape-sky-mountains-wallpaper-preview.jpg">
+				Slide 2</section>
+			<section
+				data-background-image="https://c4.wallpaperflare.com/wallpaper/131/492/954/kimi-no-na-wa-makoto-shinkai-starry-night-comet-wallpaper-preview.jpg">
+				Kimi no Na Wa?</section>
+		</div>
+	</div>
+
+	<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			hash: true,
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/highlight/highlight.js' },
+				{ src: 'plugin/notes/notes.js', async: true }
+			]
+		});
+
+		// let socket = null
+		let socket = io.connect("http://localhost:3000")
+		Reveal.addEventListener('ready', function (event) {
+			// const slide = event.indexh
+			socket.on("changeSlide", function (slide) {
+				console.log(`on slide ${slide}`)
+				Reveal.slide(slide)
+			})
+
+
+		})
+		Reveal.addEventListener('slidechanged', function (event) {
+			// socket = io.connect("http://localhost:3000")
+			socket.emit("nextSlide", event.indexh)
+		})
+	</script>
+
+</body>
+
+</html>
