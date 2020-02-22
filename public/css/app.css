@@ -1,0 +1,78 @@
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.full {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.item {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.owl-nav {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    z-index: 9;
+}
+
+.owl-prev,
+.owl-next {
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: red;
+    margin: 0px 50px;
+
+}
+
+.owl-prev:hover>i,
+.owl-next:hover>i {
+    color: white;
+}
+
+i {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 50px;
+}
+
+
+.cover {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.image1 {
+    background-image: url("../images/pic1.jpg");
+}
+
+.image2 {
+    background-image: url("../images/pic2.jpg");
+}
+
+.image3 {
+    background-image: url("../images/pic3.jpg");
+}
+
+.image4 {
+    background-image: url("../images/pic4.jpg");
+}
