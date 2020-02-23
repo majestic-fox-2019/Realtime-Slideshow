@@ -23,7 +23,7 @@ export default {
  name: 'SlideShow',
  data() {
    return {
-     total: 1,
+     total: localStorage.idxSlide || 1,
      arrText: [
        "5 Langkah membuat socket.io",
        "1. Install socket.io (untuk sisi server) dengan npm",
@@ -67,10 +67,10 @@ export default {
  methods: {
    // handle action dari element2, dan kirim ke server
    add() {
-     socket.emit('add', this.total);
+     socket.emit('add', this.$store.state.idxSlide);
    },
    subtract() {
-     socket.emit('subtract', this.total);
+     socket.emit('subtract', this.$store.state.idxSlide);
    }
  },
  created(){
@@ -78,12 +78,14 @@ export default {
    socket.on('add', (newTotal) => {
      if (newTotal <= 10) {
        this.total = newTotal;
+       this.$store.commit('updateSlide', newTotal);
      }
    });
 
    socket.on('subtract', (newTotal) => {
      if (newTotal >= 1) {      
        this.total = newTotal;
+       this.$store.commit('updateSlide', newTotal);
      }
    });
  }
